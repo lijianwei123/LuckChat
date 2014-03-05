@@ -1,10 +1,12 @@
 <?php
+namespace db;
+
 /**
  * @desc      redis
  * @author    lijianwei    2014-3-4
  */
 
-class redisDb extends Db
+class redisDb extends db
 {
     public static function connect()
     {
