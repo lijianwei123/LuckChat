@@ -14,7 +14,7 @@ class indexController
     }
     public function index()
     {
-        $site = "测试";
+        $this->assign("site", "测试");
         $this->display('main/index');
     }
 }

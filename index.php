@@ -32,6 +32,7 @@ function modifyCode($flag, $className)
              $docComment = $class->getDocComment();
              if($docComment && (false !== strpos($docComment, '@ViewRender'))) {
                  if(!extension_loaded('runkit')) trigger_error('depend runkit extension', E_USER_ERROR);
+                 require_once(__DIR__. DS . 'core'. DS. 'baseController.php');
                  runkit_class_adopt($className, "\core\baseController");
              }
         break;
@@ -40,5 +41,5 @@ function modifyCode($flag, $className)
 }
 
 $className = "\\module\\". $m_name. "\\". $c_name. 'Controller';
-
-call_user_func_array(array($className, $a_name), array());
+$obj = new $className;
+call_user_func_array(array($obj, $a_name), array());
