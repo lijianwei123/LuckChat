@@ -33,7 +33,7 @@ function modifyCode($flag, $className)
              if($docComment && (false !== strpos($docComment, '@ViewRender'))) {
                  if(!extension_loaded('runkit')) trigger_error('depend runkit extension', E_USER_ERROR);
                  require_once(__DIR__. DS . 'core'. DS. 'baseController.php');
-                 runkit_class_adopt($className, "\core\baseController");
+                 runkit_class_adopt($className, "core\baseController");
              }
         break;
             
