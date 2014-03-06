@@ -7,5 +7,8 @@ namespace module\chat;
  */
 class chat
 {
-     public function 
+     public function index()
+     {
+         
+     }
 }

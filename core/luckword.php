@@ -10,7 +10,7 @@ use db\redisdb as redis;
 class luckWord extends singleton
 {
     //zset
-    private $_workRankKey = 'word:rank';
+    private $_wordRankKey = 'word:rank';
     //set
     private $_inValidKey = 'word:invalid';
      
@@ -19,12 +19,12 @@ class luckWord extends singleton
     {
         return  redis::getInstance()->sismember($this->_inValidKey, $word);
     }
-    
-    //更新  
+     
+    //更新  幸运词的频率
     //@todo  可以异步更新
     public function updateWordLuckRank($luckWord = '')
     {
-        
+        return redis::getInstance()->zIncrBy($this->_wordRankKey, 1, $luckWord);
     } 
     
 }

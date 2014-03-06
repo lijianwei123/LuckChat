@@ -13,9 +13,32 @@ $a_name = @$_GET['a'] ?: 'index';
 //只支持命名空间加载
 function __autoload($className = '')
 {
-   require_once(__DIR__. DS. str_replace("\\", DS, ltrim($className, "\\")). ".php"); 
+   $flag = '';
+   if(substr($className, -10, 10) === 'Controller') {
+       $flag = 'Controller';
+   }
+   require_once(__DIR__. DS. str_replace("\\", DS, ltrim($className, "\\")). ".php");
+   
+   //runkit 修改代码
+   modifyCode($flag, $className);
 }
 
-$className = "\\module\\". $m_name. "\\". $c_name;
+function modifyCode($flag, $className)
+{
+    switch($flag) {
+        case 'Controller':
+             //加上基类
+             $class = new ReflectionClass($className);
+             $docComment = $class->getDocComment();
+             if($docComment && (false !== strpos($docComment, '@ViewRender'))) {
+                 if(!extension_loaded('runkit')) trigger_error('depend runkit extension', E_USER_ERROR);
+                 runkit_class_adopt($className, "\core\baseController");
+             }
+        break;
+            
+    }
+}
+
+$className = "\\module\\". $m_name. "\\". $c_name. 'Controller';
 
 call_user_func_array(array($className, $a_name), array());
