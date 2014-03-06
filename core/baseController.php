@@ -9,6 +9,12 @@ class baseController
 {
     private $_tpl_vars = array();
     
+    public function __construct()
+    {
+        header("content-type:text/html;charset=utf-8");
+        
+    }
+    
     //只是加载
     public function display($tpl_name = '')
     {
