@@ -9,9 +9,6 @@ namespace module\main;
  */
 class indexController
 {
-    public function __construct()
-    {
-    }
     public function index()
     {
         $this->assign("site", "测试");
